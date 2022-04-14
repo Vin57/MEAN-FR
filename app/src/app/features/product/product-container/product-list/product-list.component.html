@@ -1,8 +1,14 @@
 <mat-toolbar>
   Liste des produits
 </mat-toolbar>
-<form (ngSubmit)="submit()" [formGroup]="productSearchForm" class="mt-20">
+<form [formGroup]="productSearchForm" class="mt-20">
   <input placeholder="Search something cool 🚀" matInput formControlName="search" type="text"/>
+  <div *ngIf="search.errors?.['minlength'] instanceof String">
+    {{ search.errors?.['minlength'] }}
+  </div>
+  <div *ngIf="search.errors?.['maxlength'] instanceof String">
+    {{ search.errors?.['maxlength'] }}
+  </div>
 </form>
 <mat-list class="mb-20 list-primary">
   <mat-list-item class="mb-20" *ngFor="let product of products$ | async">
