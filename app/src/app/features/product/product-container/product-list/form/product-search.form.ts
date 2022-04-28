@@ -1,32 +1,44 @@
 import { Injectable } from "@angular/core";
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { FormGroup, Validators } from "@angular/forms";
 
 import { ISearchProduct } from 'src/app/features/product/product-container/product-list/form/product-search.type';
+import { BaseFormBuilder } from "src/app/shared/form/base-form.builder";
 
 @Injectable({
   providedIn: 'root',
 })
-export class ProductSearchFormBuilder {
+export class ProductSearchFormBuilder extends BaseFormBuilder {
 
-  constructor(private fb: FormBuilder) {}
-
-  build(emptyData: ISearchProduct = {search: ''}): FormGroup
+  build(data: ISearchProduct = {search: ''}): FormGroup
   {
-    return this.fb.group({
+    this._form = this.group({
       search: [
-        emptyData.search,
+        data.search,
         [
           Validators.minLength(3),
           Validators.maxLength(100)
         ]
       ]
     });
+
+    return super.build(data);
   }
 
-  errors : {[field: string]: {[field: string]: string}} = {
-    search: {
-      minlength: "Au moins 3 caractères sont requis.",
-      maxLength: "100 caractères maximum."
+  public getErrorMessages()
+  {
+    return {
+      search: {
+        minlength: {
+          fr: "Au moins {{requiredLength}} caractères sont requis."
+        },
+        maxlength: {
+          fr: "{{actualLength}}/{{requiredLength}} caractères maximum."
+        }
+      }
     }
+  }
+
+  public submit(form: FormGroup): void {
+    throw new Error("Method not implemented.");
   }
 }
