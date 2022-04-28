@@ -32,7 +32,7 @@ export class ProductSearchFormBuilder extends BaseFormBuilder {
           fr: "Au moins {{requiredLength}} caractères sont requis."
         },
         maxlength: {
-          fr: "{{nbr}} caractères maximum."
+          fr: "{{actualLength}}/{{requiredLength}} caractères maximum."
         }
       }
     }

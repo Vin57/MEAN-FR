@@ -79,20 +79,22 @@ export abstract class BaseFormBuilder extends FormBuilder {
       // Check if we have translation error messages for each of the constraint violation
       for (let [violationName, violationData] of Object.entries(violationConstraint)) { // minlength: {requiredLength: 3, actualLength: 1}
         if (!translatedErrorMessages[field].hasOwnProperty(violationName)) {
-          violationData = `Error on ${field} field for violation ${violationName}.`;
           console.log(`Missing translation for ${field} on violation ${violationName}`);
           return; // Continue to next ValidationError
         }
 
         // Check if this is there is a translated message in the user locale for this field violation.
         if (!translatedErrorMessages[field][violationName].hasOwnProperty(locale)) {
-          // @TODO Use english message as default, if there is no english message, use default error message
+          // @TODO Use english message as default, if there is no english message, use default error message.
           // There is no translated message for the user locale.
           console.log(`Missing translation for ${field} on violation ${violationName} for locale ${locale}`);
         }
 
         // Perfect ! We got a translated message which match exactly the violation we had.
         violations[field][violationName] = translatedErrorMessages[field][violationName][locale];
+        for (let [violation, value] of Object.entries(violationData)) {
+          violations[field][violationName] = violations[field][violationName].replace(`{{${violation}}}`, value);
+        }
       }
     };
 
