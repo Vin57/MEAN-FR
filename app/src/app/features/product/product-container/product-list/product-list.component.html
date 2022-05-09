@@ -2,13 +2,13 @@
   Liste des produits
 </mat-toolbar>
 <form [formGroup]="productSearchForm" class="mt-20">
-  <mat-form-field appearance="fill">
+  <mat-form-field *ngIf="search" appearance="fill">
     <mat-label>Search something cool 🚀</mat-label>
-    <input matInput formControlName="search" type="text" onst=""/>
-    <div *ngFor="let err of search.errors | keyvalue">
+    <input matInput formControlName="search" type="text"/>
+    <div *ngFor="let err of search?.errors | keyvalue">
       <mat-error *ngIf="err.value | IsString">{{ err.value }}</mat-error>
     </div>
-</mat-form-field>
+  </mat-form-field>
 </form>
 <mat-list class="mb-20 list-primary">
   <mat-list-item class="mb-20" *ngFor="let product of products$ | async">

@@ -4,8 +4,8 @@ import { debounceTime } from "rxjs/operators";
 export abstract class BaseFormBuilder extends FormBuilder {
 
   constructor(
-    protected _form: FormGroup,
-    protected _submit: CallableFunction
+    protected _form?: FormGroup,
+    protected _submit?: CallableFunction
   ) {
     super();
   }
@@ -122,8 +122,8 @@ export abstract class BaseFormBuilder extends FormBuilder {
    */
   private reset(): void
   {
-    this._form = this.group({});
-    this._submit = () => { throw new Error("Submit not implemented."); };
+    this._form = null;
+    this._submit = null;
   }
 
   /**
