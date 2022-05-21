@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { IProduct } from '../../logic/interfaces/product.interface';
 import { debounceTime, switchMap, tap } from 'rxjs/operators';
-import { ISearchProduct } from 'src/app/features/product/product-container/product-list/form/product-search.type';
+import { ISearchProduct } from 'src/app/features/product/product-container/product-form/form/product-search.type';
 
 const HTTP_API = '/api/';
 

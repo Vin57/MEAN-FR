@@ -1,0 +1,9 @@
+<form [formGroup]="productSearchForm" class="mt-20 form-big" [style]="search.pristine?'':'display: flex;'">
+  <mat-form-field *ngIf="search" appearance="outline" class="field-big">
+    <mat-label>Search something cool</mat-label>
+    <input matInput formControlName="search" type="text" (change)="onSearchChange($event)" (click)="onClick($event)"/>
+    <div *ngFor="let err of search?.errors | keyvalue">
+      <mat-error *ngIf="err.value | IsString">{{ err.value }}</mat-error>
+    </div>
+  </mat-form-field>
+</form>

@@ -8,9 +8,8 @@ services:
             - 4200:4200
             - 49153:49153
         volumes:
-            - type: bind
-              source: ./app/src
-              target: /usr/app/src
+            - ./app/src:/usr/app/src
+            - ./app/package.json:/usr/app/package.json
     express:
         build:
             context: ./server
@@ -18,18 +17,11 @@ services:
         ports: 
             - 80:3000
         volumes:
-            - type: bind
-              source: ./public
-              target: /express/public
-            - type: bind
-              source: ./server/models
-              target: /express/models
-            - type: bind
-              source: ./server/routes
-              target: /express/routes
-            - type: bind
-              source: ./server/app.js
-              target: /express/app.js
+            - ./public:/express/public
+            - ./server/models:/express/models
+            - ./server/routes:/express/routes
+            - ./server/app.js:/express/app.js
+            - ./server/package.json:/express/package.json
         depends_on: 
             - angular
     mongo:

@@ -1,0 +1,15 @@
+<mat-card >
+  <mat-card-header>
+    <mat-card-title style="float: left;">{{product.name}}</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <p>{{product.description}}</p><br>
+    <mat-chip-list>
+      <mat-chip *ngFor="let cat of product.categories" color="primary">#{{cat.name}}</mat-chip>
+    </mat-chip-list>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-button style="float:right;"><mat-icon>comment</mat-icon></button>
+    <button class="mat-button action">ACHETER</button>
+  </mat-card-actions>
+</mat-card>

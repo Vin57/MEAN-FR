@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { FormGroup, Validators } from "@angular/forms";
 
-import { ISearchProduct } from 'src/app/features/product/product-container/product-list/form/product-search.type';
+import { ISearchProduct } from "./product-search.type";
 import { BaseFormBuilder } from "src/app/shared/form/base-form.builder";
 
 @Injectable({
