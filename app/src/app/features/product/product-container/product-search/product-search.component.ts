@@ -7,9 +7,10 @@ import { ProductSearchFormBuilder } from './form/product-search.form';
 
 @Component({
   selector: 'app-product-form',
-  templateUrl: './product-form.component.html'
+  templateUrl: './product-search.component.html',
+  styleUrls: ['./product-search.component.scss']
 })
-export class ProductFormComponent implements OnInit {
+export class ProductSearchComponent implements OnInit {
   public products$: BehaviorSubject<IProduct[]>;
   public productSearchForm: FormGroup = new FormGroup({});
 
@@ -19,7 +20,6 @@ export class ProductFormComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-
     this.initForm();
   }
 
@@ -53,6 +53,6 @@ export class ProductFormComponent implements OnInit {
       return null;
     }
 
-    this.productService.searchProducts(form.value);
+    this.productService.search(form.value).subscribe();
   }
 }

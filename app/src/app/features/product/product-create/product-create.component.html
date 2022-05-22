@@ -1,0 +1,47 @@
+<form [formGroup]="form" class="mt-20 form-big" (submit)="submit(form)">
+  <div>
+    <mat-form-field *ngIf="name" appearance="outline" class="field-big">
+      <mat-label>Name</mat-label>
+      <input matInput formControlName="name" type="text"/>
+      <div *ngFor="let err of name?.errors | keyvalue">
+        <mat-error *ngIf="err.value | IsString">{{ err.value }}</mat-error>
+      </div>
+    </mat-form-field>
+  </div>
+  <div>
+    <mat-form-field>
+      <textarea matInput
+        placeholder="Description"
+        formControlName="description">
+      </textarea>
+    </mat-form-field>
+  </div>
+  <div>
+    <mat-form-field *ngIf="categories" appearance="fill">
+      <mat-label>Select</mat-label>
+      <mat-select formControlName="categories" multiple>
+        <div *ngFor="let categorie of categories$">
+          <mat-option [value]="categorie._id">
+            {{categorie.name}}
+          </mat-option>
+        </div>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div>
+    <mat-form-field *ngIf="price" appearance="outline" class="field-big">
+      <mat-label>Price</mat-label>
+      <input matInput formControlName="price" type="number"/>
+      <div *ngFor="let err of price?.errors | keyvalue">
+        <mat-error *ngIf="err.value | IsString">{{ err.value }}</mat-error>
+      </div>
+    </mat-form-field>
+  </div>
+  <button mat-stroked-button type="submit">SUBMIT</button>
+</form>
+
+<div class="bottom">
+  <button color="primary" style="float: left;" mat-fab routerLink="/products">
+    <mat-icon>keyboard_return</mat-icon>
+  </button>
+</div>

@@ -39,18 +39,19 @@ export abstract class BaseFormBuilder extends FormBuilder {
     return form;
   }
 
-  protected subscribeValueChange(form: FormGroup, submit: CallableFunction): void
+  protected subscribeValueChange(form: FormGroup, submit?: CallableFunction): void
   {
     form.valueChanges.pipe(
       debounceTime(500)
     ).subscribe(_ => {
-
       if (!form.valid) {
         // The form is not valid, update message errors.
         this.updateErrorMessages(form);
       }
 
-      return submit(form) // The form is valid, submit the query
+      if (submit) {
+        return submit(form) // The form is valid, submit the query
+      }
     });
   }
 
@@ -64,12 +65,11 @@ export abstract class BaseFormBuilder extends FormBuilder {
     Object.keys(form.controls).forEach(key => {
       let control:AbstractControl = form.get(key);
       // Check if control has error
-      if (!control.hasError) {
+      if (!control.errors) {
         return; // There is no error, continue to next control of this form
       }
       errors[key] = control.errors;
     });
-
 
     // Translate the error messages...
     this.translateErrorMessage(errors);

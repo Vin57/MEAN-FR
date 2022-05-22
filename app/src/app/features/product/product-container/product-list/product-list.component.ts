@@ -5,7 +5,8 @@ import { ProductService } from 'src/app/shared/services/product.service';
 
 @Component({
   selector: 'app-product-list',
-  templateUrl: './product-list.component.html'
+  templateUrl: './product-list.component.html',
+  styleUrls: ['./product-list.component.scss']
 })
 export class ProductListComponent implements OnInit {
   public products$: BehaviorSubject<IProduct[]>;
@@ -16,6 +17,6 @@ export class ProductListComponent implements OnInit {
 
   ngOnInit(): void {
     this.products$ = this.productService.products$;
-    this.productService.fetchProducts().subscribe();
+    this.productService.fetch().subscribe();
   }
 }
